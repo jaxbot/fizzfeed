@@ -17,6 +17,7 @@ body {
 }
 
 .header {
+	position: relative;
 	border-bottom: solid 1px #aaa;
 	padding-bottom: 10px;
 	margin-bottom: 20px;
@@ -25,6 +26,31 @@ body {
 .header h1 {
 	font-size: 60px;
 	font-family: 'Oswald';
-	color: rgb(0, 143, 255);
 	margin: 0;
+	color: rgb(0, 143, 255);
 }
+
+.header a {
+	text-decoration: none;
+}
+
+.header .links {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.header .button {
+	display:inline-block;
+	border-radius: 100px;
+	background: rgb(0, 143, 255);
+	color: #fff;
+	width: 100px;
+	height: 60px;
+	padding-top: 40px;
+	text-align: center;
+	margin-right: 10px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
