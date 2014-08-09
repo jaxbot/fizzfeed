@@ -1,4 +1,30 @@
 body {
 	background: #efefef;
 	color: #333;
+	font-family: Roboto;
+}
+
+.wrapper {
+	width: 1000px;
+	min-height: 800px;
+	display: block;
+	position: relative;
+	margin: auto;
+	background: #fff;
+	border: solid 1px #ccc;
+	padding: 15px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+	border-bottom: solid 1px #aaa;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+.header h1 {
+	font-size: 60px;
+	font-family: 'Oswald';
+	color: rgb(0, 143, 255);
+	margin: 0;
 }
