@@ -5,5 +5,10 @@ Welcome to FizzBuzz
 {% endblock %}
 
 {% block content %}
-
+	{% for post in posts %}
+		<div class="post">
+			<h2>{{ post.title }}</h2>
+			{{ post.description }}
+		</div>
+	{% endfor %}
 {% endblock %}
