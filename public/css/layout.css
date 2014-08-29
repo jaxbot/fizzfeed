@@ -63,3 +63,7 @@ body {
 	font-size: 30px;
 }
 
+.body-editor {
+	border: solid 1px #999;
+}
+

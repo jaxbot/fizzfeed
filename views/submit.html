@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="/ext/quill.snow.css" type="text/css" />
+	<script src="/ext/quill.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<form method='post' action='/submit'>
+	<b>Title</b>: <input type="text" value="" name="title"><br>
+	<b>Source</b>: <input type="text" value="{{ referer }}" name="source"><br>
+
+	<div class='body-editor'>
+		<div id="toolbar">
+		  <button class="ql-bold">Bold</button>
+		  <button class="ql-italic">Italic</button>
+		</div>
+		<div id="editor"></div>
+	</div>
+
+	<input type="hidden" name="key" value="{{ key }}"><br>
+	<input type="submit" value="Submit">
+</form>
+<script>
+  var editor = new Quill('#editor');
+  editor.addModule('toolbar', { container: '#toolbar' });
+</script>
+{% endblock %}
+
