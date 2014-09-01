@@ -37,7 +37,8 @@ function *submit(key) {
 }
 
 function *create() {
-  this.body = yield render('submit', { referer: this.request.headers.referer, key: key || '' });
+  var results = yield db.query("INSERT INTO `posts` (title, body, link, time) VALUES (" + db.escape(this.request.body.title) + ", " + db.escape('lol') + ", " + db.escape(this.request.body.source) + ", " + db.escape((new Date).getTime() / 1000) + ")");
+  //this.response.redirect('/post/' + results[0][0].link);
 }
 
 app.listen(8300);
