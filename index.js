@@ -37,7 +37,11 @@ function *submit(key) {
 }
 
 function *create() {
-  var results = yield db.query("INSERT INTO `posts` (title, body, link, time) VALUES (" + db.escape(this.request.body.title) + ", " + db.escape('lol') + ", " + db.escape(this.request.body.source) + ", " + db.escape((new Date).getTime() / 1000) + ")");
+  var results = yield db.query("INSERT INTO `posts` (title, body, link, time) VALUES (" +
+    db.escape(this.request.body.title) + ", " +
+    db.escape('lol') + ", " + db.escape(this.request.body.source) + ", " +
+    db.escape((new Date).getTime() / 1000) + ")");
+  console.log(results);
   //this.response.redirect('/post/' + results[0][0].link);
 }
 
