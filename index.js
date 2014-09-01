@@ -1,12 +1,14 @@
 var koa = require('koa');
 var route = require('koa-route');
 var serve = require('koa-static');
+var bodyParser = require('koa-body-parser');
 
 var db = require('./db');
 var render = require('./render');
 
 var app = koa();
 
+app.use(bodyParser());
 app.use(serve('public/'));
 app.use(route.get('/', home));
 app.use(route.get('/random', random));
