@@ -6,6 +6,6 @@
 {% block content %}
 	<div class="post">
 		<a href="/post/{{ post.link }}"><h2>{{ post.title }}</h2></a>
-		{{ post.body }}
+		{% autoescape false %}{{ post.body }}{% endautoescape %}
 	</div>
 {% endblock %}
