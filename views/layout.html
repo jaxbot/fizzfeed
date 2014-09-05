@@ -4,14 +4,15 @@
 		<title>{% block title %}FizzBuzz!{% endblock %}</title>
 		<link href='http://fonts.googleapis.com/css?family=Oswald:400|Roboto' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/css/layout.css" />
+		<script src="/js/main.js"></script>
 		{% block head %}
 		{% endblock %}
 	</head>
 	<body>
 		<div class="wrapper">
 			<div class="header">
-				<a href='/'><h1>FizzFeed</h1></a>
-				<b>An example application</b>
+				<a href='/'><h1>Slacker News</h1></a>
+				<b>The place for <span id="forwhom">slacking coders</span></b>
 				<div class='links'>
 					<a class="button" href="/new">New</a>
 					<a class="button" href="/hot">Hot</a>
@@ -20,9 +21,11 @@
 				</div>
 			</div>
 
-			{% block content %}
-			Default
-			{% endblock %}
+			<div class="content">
+				{% block content %}
+				Default
+				{% endblock %}
+			</div>
 		</div>
 	</body>
 </html>

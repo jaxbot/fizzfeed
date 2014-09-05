@@ -11,9 +11,9 @@ body {
 	position: relative;
 	margin: auto;
 	background: #fff;
-	border: solid 1px #ccc;
-	padding: 15px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* border: solid 1px #ccc; */
+	/* padding: 15px; */
+	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .header {
@@ -21,13 +21,16 @@ body {
 	border-bottom: solid 1px #aaa;
 	padding-bottom: 10px;
 	margin-bottom: 20px;
+	padding: 15px;
+	background: rgb(255, 100, 0);
+	color: #fff;
 }
 
 .header h1 {
 	font-size: 60px;
 	font-family: 'Oswald';
 	margin: 0;
-	color: rgb(0, 143, 255);
+	color: rgb(255, 255, 255);
 }
 
 .header a {
@@ -36,14 +39,14 @@ body {
 
 .header .links {
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right: 15px;
+	top: 10px;
 }
 
 .header .button {
 	display:inline-block;
 	border-radius: 100px;
-	background: rgb(0, 143, 255);
+	/* background: rgb(0, 143, 255); */
 	color: #fff;
 	width: 100px;
 	height: 60px;
@@ -52,6 +55,10 @@ body {
 	margin-right: 10px;
 	text-decoration: none;
 	font-size: 20px;
+}
+
+.content {
+	padding: 0px 15px;
 }
 
 .post a {
