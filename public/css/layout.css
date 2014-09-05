@@ -11,9 +11,6 @@ body {
 	position: relative;
 	margin: auto;
 	background: #fff;
-	/* border: solid 1px #ccc; */
-	/* padding: 15px; */
-	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .header {
@@ -47,7 +44,6 @@ body {
 .header .button {
 	display:inline-block;
 	border-radius: 100px;
-	/* background: rgb(0, 143, 255); */
 	color: #fff;
 	width: 100px;
 	height: 60px;
