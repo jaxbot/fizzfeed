@@ -39,6 +39,16 @@ function *submit(key) {
 function *create() {
   var link = this.request.body.title.toLowerCase().replace(/\s/g, "-");
 
+  var temp = link;
+  var check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
+  var i = 1;
+  while (check[0].length > 0) {
+	temp = link + "-" + i;
+	i++;
+    check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
+  }
+  link = temp;
+
   var results = yield db.query("INSERT INTO `posts` (title, body, link, time) VALUES (" +
     db.escape(this.request.body.title) + ", " +
     db.escape(this.request.body.body) + ", " + db.escape(link) + ", " +
