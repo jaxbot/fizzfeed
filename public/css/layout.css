@@ -73,5 +73,13 @@ body {
 
 .body-editor {
 	border: solid 1px #999;
+	height: 500px;
 }
 
+form .title {
+	width: 958px;
+	font-size: 40px;
+	border: solid 1px #999;
+	padding: 5px;
+	font-family: Roboto;
+}
