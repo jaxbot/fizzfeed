@@ -67,6 +67,10 @@ body {
 	font-size: 30px;
 }
 
+.comments {
+	margin-top: 40px;
+}
+
 .body-editor {
 	border: solid 1px #999;
 }
