@@ -37,6 +37,11 @@ function *submit(key) {
 }
 
 function *create() {
+  if (!(yield isAdmin(this.cookies.get("S")))) {
+    this.body = "not admin";
+    return;
+  }
+
   var link = this.request.body.title.toLowerCase().replace(/\s/g, "-");
 
   var temp = link;
@@ -57,4 +62,12 @@ function *create() {
 }
 
 app.listen(8300);
+
+function *isAdmin(cookie) {
+  if (!cookie) return false;
+
+  var results = yield db.query("SELECT `user` FROM `keys` WHERE `key` = " + db.escape(cookie));
+  return (results[0] && results[0].length > 0)
+
+}
 
