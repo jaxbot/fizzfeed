@@ -20,6 +20,7 @@ app.use(route.get('/submit', submit));
 app.use(route.get('/edit/:id', submit));
 app.use(route.post('/submit', create));
 app.use(route.post('/upload', upload));
+app.use(error404);
 
 function *home() {
   var results = yield db.query("SELECT * FROM `posts` ORDER BY `time` DESC LIMIT 10");
@@ -28,6 +29,8 @@ function *home() {
 
 function *post(id) {
   var results = yield db.query("SELECT * FROM `posts` WHERE `link` = " + db.escape(id));
+  if (!results[0][0]) return this.status = 404;
+
   this.body = yield render('post', { post: results[0][0] });
 }
 
@@ -94,7 +97,15 @@ function *upload() {
     part.pipe(stream);
   }
 
-  this.body = "OK";
+  this.body = "<script>top.insertAtEnd(\"<img src=''>\");</script>";
+}
+
+function *error404(next) {
+  yield next;
+  if (404 != this.status) return;
+  this.status = 404;
+
+  this.body = yield render('404')
 }
 
 app.listen(8300);
