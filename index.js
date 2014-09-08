@@ -1,7 +1,10 @@
 var koa = require('koa');
 var route = require('koa-route');
 var serve = require('koa-static');
+var parse = require('co-busboy');
 var bodyParser = require('koa-body-parser');
+
+var fs = require('fs');
 
 var db = require('./db');
 var render = require('./render');
@@ -16,6 +19,7 @@ app.use(route.get('/post/:id', post));
 app.use(route.get('/submit', submit));
 app.use(route.get('/edit/:id', submit));
 app.use(route.post('/submit', create));
+app.use(route.post('/upload', upload));
 
 function *home() {
   var results = yield db.query("SELECT * FROM `posts` ORDER BY `time` DESC LIMIT 10");
@@ -74,6 +78,23 @@ function *create() {
     db.escape(this.request.body.body) + ", " + db.escape(link) + ", " +
     db.escape((new Date).getTime() / 1000) + ")");
   this.response.redirect('/post/' + link);
+}
+
+function *upload() {
+  if (!(yield isAdmin(this.cookies.get("S")))) {
+    this.body = "not admin";
+    return;
+  }
+
+  var parts = parse(this);
+  var part;
+
+  while (part = yield parts) {
+    var stream = fs.createWriteStream("uploads/" + part.filename);
+    part.pipe(stream);
+  }
+
+  this.body = "OK";
 }
 
 app.listen(8300);
