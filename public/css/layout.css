@@ -6,11 +6,8 @@ body {
 }
 
 .wrapper {
-	width: 1000px;
-	min-height: 800px;
 	display: block;
 	position: relative;
-	margin: auto;
 	background: #fff;
 }
 
@@ -35,22 +32,15 @@ body {
 }
 
 .header .links {
-	position: absolute;
-	right: 15px;
-	top: 12px;
-	font-weight: 800;
+	margin: -16px;
+	margin-top: 10px;
+	padding: 10px;
+	background: #333;
+	text-align: right;
 }
 
-.header .button {
-	display:inline-block;
-	border-radius: 100px;
+.header .links a {
 	color: #fff;
-	width: 100px;
-	height: 60px;
-	padding-top: 40px;
-	text-align: center;
-	margin-right: 10px;
-	text-decoration: none;
 	font-size: 20px;
 }
 
@@ -90,3 +80,18 @@ form .title {
 	padding: 5px;
 	font-family: Roboto;
 }
+
+@media (min-width: 1000px) {
+	.wrapper {
+		width: 1000px;
+		min-height: 800px;
+		margin: auto;
+	}
+	.header .links {
+		position: absolute;
+		right: 16px;
+		top: 12px;
+		font-weight: 800;
+	}
+}
+
