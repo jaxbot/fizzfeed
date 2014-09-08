@@ -14,7 +14,7 @@ app.use(route.get('/', home));
 app.use(route.get('/random', random));
 app.use(route.get('/post/:id', post));
 app.use(route.get('/submit', submit));
-app.use(route.get('/submit/:key', submit));
+app.use(route.get('/edit/:id', submit));
 app.use(route.post('/submit', create));
 
 function *home() {
@@ -32,8 +32,18 @@ function *random(id) {
   this.response.redirect('/post/' + results[0][0].link);
 }
 
-function *submit(key) {
-  this.body = yield render('submit', { referer: this.request.headers.referer, key: key || '' });
+function *submit(id) {
+  var post = {};
+
+  if (typeof id == "string") {
+    var results = yield db.query("SELECT * FROM `posts` WHERE `link` = " + db.escape(id));
+    post = results[0][0];
+  }
+
+  this.body = yield render('submit', {
+    referer: this.request.headers.referer,
+    post: post
+  });
 }
 
 function *create() {
@@ -42,19 +52,24 @@ function *create() {
     return;
   }
 
-  var link = this.request.body.title.toLowerCase().replace(/\s/g, "-");
+  var link;
+  if (a = this.request.body.link)
+    link = a;
+  else {
+    link = this.request.body.title.toLowerCase().replace(/\s/g, "-");
 
-  var temp = link;
-  var check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
-  var i = 1;
-  while (check[0].length > 0) {
-	temp = link + "-" + i;
-	i++;
-    check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
+    var temp = link;
+    var check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
+    var i = 1;
+    while (check[0].length > 0) {
+	  temp = link + "-" + i;
+	  i++;
+      check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
+    }
+    link = temp;
   }
-  link = temp;
 
-  var results = yield db.query("INSERT INTO `posts` (title, body, link, time) VALUES (" +
+  var results = yield db.query("REPLACE INTO `posts` (title, body, link, time) VALUES (" +
     db.escape(this.request.body.title) + ", " +
     db.escape(this.request.body.body) + ", " + db.escape(link) + ", " +
     db.escape((new Date).getTime() / 1000) + ")");

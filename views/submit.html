@@ -11,7 +11,7 @@
 {% block content %}
 
 <form method='post' action='/submit' onsubmit="body.value = editor.getHTML()">
-  <input type="text" value="" name="title" placeholder="Title" class="title"><br>
+  <input type="text" value="{{ post.title }}" name="title" placeholder="Title" class="title"><br>
 
   <div class='body-editor'>
     <div id="toolbar" class="toolbar">
@@ -37,9 +37,10 @@
 	<span title="Image" class="ql-format-button ql-image"></span>
       </span>
     </div>
-    <div id="editor"></div>
+    <div id="editor">{% autoescape false %}{{ post.body }}{% endautoescape %}</div>
   </div>
 
+  <input type="hidden" name="link" value="{{ post.link }}"><br>
   <input type="hidden" name="key" value="{{ key }}"><br>
   <textarea name="body" id="editor_body" style="display:none"></textarea>
   <input type="submit" value="Submit">
