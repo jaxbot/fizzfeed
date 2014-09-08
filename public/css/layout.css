@@ -6,11 +6,8 @@ body {
 }
 
 .wrapper {
-	width: 1000px;
-	min-height: 800px;
 	display: block;
 	position: relative;
-	margin: auto;
 	background: #fff;
 }
 
@@ -90,3 +87,12 @@ form .title {
 	padding: 5px;
 	font-family: Roboto;
 }
+
+@media (min-width: 1000px) {
+	.wrapper {
+		width: 1000px;
+		min-height: 800px;
+		margin: auto;
+	}
+}
+
