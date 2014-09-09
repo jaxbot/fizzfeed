@@ -58,6 +58,16 @@ body {
 	margin-left: -5px;
 }
 
+.share {
+	float: right;
+	margin-top: 10px;
+}
+
+.share img {
+	display: block;
+	margin: 3px;
+}
+
 .comments {
 	margin-top: 40px;
 }
