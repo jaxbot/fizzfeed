@@ -5,6 +5,7 @@ var parse = require('co-busboy');
 var bodyParser = require('koa-body-parser');
 
 var fs = require('fs');
+var yfs = require('./fs');
 
 var db = require('./db');
 var render = require('./render');
@@ -18,6 +19,7 @@ app.use(route.get('/random', random));
 app.use(route.get('/post/:id', post));
 app.use(route.get('/submit', submit));
 app.use(route.get('/edit/:id', submit));
+app.use(route.get('/gallery', gallery));
 app.use(route.post('/submit', create));
 app.use(route.post('/upload', upload));
 app.use(error404);
@@ -92,12 +94,26 @@ function *upload() {
   var parts = parse(this);
   var part;
 
-  while (part = yield parts) {
-    var stream = fs.createWriteStream("uploads/" + part.filename);
-    part.pipe(stream);
+  part = yield parts;
+  var stream = fs.createWriteStream("public/uploads/" + part.filename);
+  part.pipe(stream);
+
+  this.body = "<script>top.insertAtEnd(\"<img src='uploads/" + part.filename + "'>\");</script>";
+}
+
+function *gallery() {
+  if (!(yield isAdmin(this.cookies.get("S")))) {
+    this.body = "not admin";
+    return;
   }
 
-  this.body = "<script>top.insertAtEnd(\"<img src=''>\");</script>";
+  var files = yield yfs.readdir("public/uploads");
+
+  var body = "";
+  for (var i = 0; i < files.length; i++) {
+    body += "<img src=\"uploads/" + files[i] + "\" class=\"gallery\">";
+  }
+  this.body = body;
 }
 
 function *error404(next) {

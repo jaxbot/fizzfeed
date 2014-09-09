@@ -46,7 +46,9 @@
   <input type="submit" value="Submit">
 </form>
 
-<form method="post" action="/upload" enctype="multipart/form-data">
+<iframe name="backgrounder" id="backgrounder" style="display:none"></iframe>
+
+<form method="post" action="/upload" target="backgrounder" enctype="multipart/form-data">
   <input type="file" name="upload" />
   <input type="submit" />
 </form>
@@ -55,6 +57,10 @@ var editor = new Quill('#editor');
 editor.addModule('toolbar', { container: '#toolbar' });
 editor.addModule('image-tooltip');
 editor.addModule('link-tooltip');
+
+function insertAtEnd(html) {
+  editor.setHTML(editor.getHTML() + html);
+}
 </script>
 {% endblock %}
 
