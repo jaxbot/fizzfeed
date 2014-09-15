@@ -4,9 +4,9 @@
 
 {% block content %}
 <div class="share">
-	<a href=""><img src="/facebook_button.png"></a>
-	<a href=""><img src="/twitter_button.png"></a>
-	<a href=""><img src="/gplus_button.png"></a>
+    <a href="javascript:share('fb');"><img src="/facebook_button.png"></a>
+    <a href="javascript:share('tw');"><img src="/twitter_button.png"></a>
+    <a href="javascript:share('gp');"><img src="/gplus_button.png"></a>
 </div>
 <div class="post">
     <a href="/post/{{ post.link }}"><h2>{{ post.title }}</h2></a>
