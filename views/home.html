@@ -3,6 +3,7 @@
 {% block content %}
 	{% for post in posts %}
 		<div class="post">
+			<img class="thumbnail" src="{{ post.img }}">
 			<a href="/post/{{ post.link }}"><h2>{{ post.title }}</h2></a>
 			{{ post.description }}
 		</div>

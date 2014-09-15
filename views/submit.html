@@ -12,6 +12,8 @@
 
 <form method='post' action='/submit' onsubmit="body.value = editor.getHTML()">
   <input type="text" value="{{ post.title }}" name="title" placeholder="Title" class="title"><br>
+  <img class="thumbnail" id="imgthumb">
+  <textarea name="description">{{ post.description }}</textarea>
 
   <div class='body-editor'>
     <div id="toolbar" class="toolbar">
@@ -40,18 +42,18 @@
     <div id="editor">{% autoescape false %}{{ post.body }}{% endautoescape %}</div>
   </div>
 
+  <input type="text" name="img" value="{{ post.img }}" id="imgtxt"><br>
   <input type="hidden" name="link" value="{{ post.link }}"><br>
   <input type="hidden" name="key" value="{{ key }}"><br>
   <textarea name="body" id="editor_body" style="display:none"></textarea>
   <input type="submit" value="Submit">
 </form>
 
-<iframe name="backgrounder" id="backgrounder" style="display:none"></iframe>
+<input type="file" id="filechooser" name="upload" />
+<br>
+<input type="button" onclick="ajaxUpload('thumb')" value="Make thumbnail" />
+<input type="button" onclick="ajaxUpload('insert')" value="Insert img" />
 
-<form method="post" action="/upload" target="backgrounder" enctype="multipart/form-data">
-  <input type="file" name="upload" />
-  <input type="submit" />
-</form>
 <script>
 var editor = new Quill('#editor');
 editor.addModule('toolbar', { container: '#toolbar' });
@@ -60,6 +62,11 @@ editor.addModule('link-tooltip');
 
 function insertAtEnd(html) {
   editor.setHTML(editor.getHTML() + html);
+}
+
+function makeThumb(img) {
+  document.getElementById("imgtxt").value = img;  
+  document.getElementById("imgthumb").src = img;  
 }
 </script>
 {% endblock %}

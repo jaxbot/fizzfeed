@@ -78,9 +78,10 @@ function *create() {
     link = temp;
   }
 
-  var results = yield db.query("REPLACE INTO `posts` (title, body, link, time) VALUES (" +
+  var results = yield db.query("REPLACE INTO `posts` (title, body, link, img, description, time) VALUES (" +
     db.escape(this.request.body.title) + ", " +
     db.escape(this.request.body.body) + ", " + db.escape(link) + ", " +
+    db.escape(this.request.body.img) + ", " + db.escape(this.request.body.description) + ", " +
     db.escape((new Date).getTime() / 1000) + ")");
   this.response.redirect('/post/' + link);
 }
@@ -98,7 +99,7 @@ function *upload() {
   var stream = fs.createWriteStream("public/uploads/" + part.filename);
   part.pipe(stream);
 
-  this.body = "<script>top.insertAtEnd(\"<img src='uploads/" + part.filename + "'>\");</script>";
+  this.body = part.filename;
 }
 
 function *gallery() {
