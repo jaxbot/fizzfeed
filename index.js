@@ -31,7 +31,11 @@ function *home() {
 
 function *post(id) {
   var results = yield db.query("SELECT * FROM `posts` WHERE `link` = " + db.escape(id));
-  if (!results[0][0]) return this.status = 404;
+  if (!results[0][0]) {
+    this.status = 404;
+    this.body = yield render('404')
+    return;
+  }
 
   this.body = yield render('post', { post: results[0][0] });
 }

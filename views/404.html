@@ -1,3 +1,12 @@
-<h1>8 Amazing 404 pages</h1>
+{% extends "layout.html" %}
 
-I kid, I kid. Sorry, that page couldn't be found.
+{% block title %}404'd! - Slacker News{% endblock %}
+
+{% block content %}
+<div class="post">
+    <h2>404'd!</h2>
+	Sorry, that page does not exist at that link, which is either your fault or mine. I'll blame you for sake of consistency.<br><br>
+	While we're on the topic, though, check out:
+	<a href="http://slackernews.net/posts/best-404-pages" class="center"><h2>The Best 404 Pages on the Web</h2></a>
+</div>
+{% endblock %}

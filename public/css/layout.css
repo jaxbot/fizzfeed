@@ -91,6 +91,10 @@ form .title {
 	font-family: Roboto;
 }
 
+.center {
+	text-align: center;
+}
+
 @media (min-width: 1000px) {
 	.wrapper {
 		width: 1000px;
