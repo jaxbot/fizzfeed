@@ -48,6 +48,15 @@ body {
 	padding: 0px 15px;
 }
 
+.thumbnail {
+	width: 30%;
+	max-height: 250px;
+	display: inline-block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
 .post a {
 	text-decoration: none;
 	color: #333;
@@ -56,6 +65,22 @@ body {
 .post h2 {
 	font-size: 40px;
 	margin-left: -5px;
+}
+
+.post img {
+	max-width: 97%;
+}
+
+.post.thumbnail {
+	display: block;
+	position: relative;
+	min-height: 250px;
+	width: 97%;
+}
+
+.post.thumbnail {
+	padding-left: 40%;
+	width: 80%;
 }
 
 .share {
