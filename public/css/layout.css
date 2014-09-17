@@ -48,13 +48,12 @@ body {
 	padding: 0px 15px;
 }
 
-.thumbnail {
-	width: 30%;
-	max-height: 250px;
-	display: inline-block;
-	position: absolute;
-	left: 0px;
-	top: 0px;
+img.thumbnail {
+	display: block;
+}
+
+img {
+	border: none;
 }
 
 .post a {
@@ -76,11 +75,6 @@ body {
 	position: relative;
 	min-height: 250px;
 	width: 97%;
-}
-
-.post.thumbnail {
-	padding-left: 40%;
-	width: 80%;
 }
 
 .share {
@@ -131,6 +125,10 @@ form .title {
 		right: 16px;
 		top: 12px;
 		font-weight: 800;
+	}
+	.post h2 {
+		font-size: 60px;
+		margin: 10px -5px;
 	}
 }
 
