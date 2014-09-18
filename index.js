@@ -7,6 +7,8 @@ var bodyParser = require('koa-body-parser');
 var fs = require('fs');
 var yfs = require('./fs');
 
+var marked = require("marked");
+
 var db = require('./db');
 var render = require('./render');
 
@@ -20,6 +22,7 @@ app.use(route.get('/post/:id', post));
 app.use(route.get('/submit', submit));
 app.use(route.get('/edit/:id', submit));
 app.use(route.get('/gallery', gallery));
+app.use(route.get('/authorize/:key', authorize));
 app.use(route.post('/submit', create));
 app.use(route.post('/upload', upload));
 app.use(error404);
@@ -37,7 +40,9 @@ function *post(id) {
     return;
   }
 
-  this.body = yield render('post', { post: results[0][0] });
+  var post = results[0][0];
+  post.body = marked(post.body);
+  this.body = yield render('post', { post: post });
 }
 
 function *random(id) {
@@ -137,5 +142,10 @@ function *isAdmin(cookie) {
   var results = yield db.query("SELECT `user` FROM `keys` WHERE `key` = " + db.escape(cookie));
   return (results[0] && results[0].length > 0)
 
+}
+
+function *authorize(key) {
+  this.cookies.set("S", key);
+  this.body = "Okay!";
 }
 

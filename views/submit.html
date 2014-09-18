@@ -13,39 +13,12 @@
 <form method='post' action='/submit' onsubmit="body.value = editor.getHTML()">
   <input type="text" value="{{ post.title }}" name="title" placeholder="Title" class="title"><br>
   <img class="thumbnail" id="imgthumb">
-  <textarea name="description">{{ post.description }}</textarea>
-
-  <div class='body-editor'>
-    <div id="toolbar" class="toolbar">
-      <span class="ql-format-group">
-	<select title="Font" class="ql-font">
-	  <option value="sans-serif" selected>Sans Serif</option>
-	  <option value="serif">Serif</option>
-	  <option value="monospace">Monospace</option>
-	</select>
-	<select title="Size" class="ql-size">
-	  <option value="10px">Small</option>
-	  <option value="13px" selected>Normal</option>
-	  <option value="18px">Large</option>
-	  <option value="32px">Huge</option>
-	</select>
-      </span>
-      <span class="ql-format-group">
-	<span class="ql-format-button ql-bold"></span>
-	<span class="ql-format-button ql-italic"></span>
-	<span class="ql-format-button ql-underline"></span>
-	<span title="Link" class="ql-format-button ql-link"></span>
-	<span class="ql-format-separator"></span>
-	<span title="Image" class="ql-format-button ql-image"></span>
-      </span>
-    </div>
-    <div id="editor">{% autoescape false %}{{ post.body }}{% endautoescape %}</div>
-  </div>
+  <textarea name="description" class="description">{{ post.description }}</textarea>
 
   <input type="text" name="img" value="{{ post.img }}" id="imgtxt"><br>
   <input type="hidden" name="link" value="{{ post.link }}"><br>
   <input type="hidden" name="key" value="{{ key }}"><br>
-  <textarea name="body" id="editor_body" style="display:none"></textarea>
+  <textarea name="body" id="editor_body" class="body">{% autoescape false %}{{ post.body }}{% endautoescape %}</textarea>
   <input type="submit" value="Submit">
 </form>
 
