@@ -22,7 +22,6 @@ app.use(route.get('/post/:id', post));
 app.use(route.get('/submit', submit));
 app.use(route.get('/edit/:id', submit));
 app.use(route.get('/gallery', gallery));
-app.use(route.get('/authorize/:key', authorize));
 app.use(route.post('/submit', create));
 app.use(route.post('/upload', upload));
 app.use(error404);
@@ -65,11 +64,6 @@ function *submit(id) {
 }
 
 function *create() {
-  if (!(yield isAdmin(this.cookies.get("S")))) {
-    this.body = "not admin";
-    return;
-  }
-
   var link;
   if (a = this.request.body.link)
     link = a;
@@ -96,11 +90,6 @@ function *create() {
 }
 
 function *upload() {
-  if (!(yield isAdmin(this.cookies.get("S")))) {
-    this.body = "not admin";
-    return;
-  }
-
   var parts = parse(this);
   var part;
 
@@ -112,11 +101,6 @@ function *upload() {
 }
 
 function *gallery() {
-  if (!(yield isAdmin(this.cookies.get("S")))) {
-    this.body = "not admin";
-    return;
-  }
-
   var files = yield yfs.readdir("public/uploads");
 
   var body = "";
@@ -135,17 +119,4 @@ function *error404(next) {
 }
 
 app.listen(8300);
-
-function *isAdmin(cookie) {
-  if (!cookie) return false;
-
-  var results = yield db.query("SELECT `user` FROM `keys` WHERE `key` = " + db.escape(cookie));
-  return (results[0] && results[0].length > 0)
-
-}
-
-function *authorize(key) {
-  this.cookies.set("S", key);
-  this.body = "Okay!";
-}
 
