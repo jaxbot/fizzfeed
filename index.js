@@ -70,14 +70,16 @@ function *create() {
   else {
     link = this.request.body.title.toLowerCase().replace(/\s/g, "-");
 
+    // Generate a unique link ID using brute force -- keep counting up the number
+    // until we find one thats unused
+    var check;
     var temp = link;
-    var check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
-    var i = 1;
-    while (check[0].length > 0) {
-	  temp = link + "-" + i;
-	  i++;
+    var i = 0;
+    do {
+      temp = link + (i ? "-" + i : "");
       check = yield db.query("SELECT `link` FROM `posts` WHERE `link`=" + db.escape(temp));
-    }
+      i++;
+    } while (check[0].length > 0);
     link = temp;
   }
 
